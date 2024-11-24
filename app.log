@@ -1,0 +1,32 @@
+{"L":"INFO","T":"2024-11-25T00:07:31.593+0700","M":"http request middleware","url":"/api/register","duration":"0s"}
+{"L":"INFO","T":"2024-11-25T00:07:45.323+0700","M":"http request middleware","url":"/api/register","duration":"0s"}
+{"L":"DEBUG","T":"2024-11-25T00:07:57.915+0700","M":"insert into \"User\"(\"name\", \"email\", \"phone\", \"password\") values ($1, $2, $3, $4)"}
+{"L":"INFO","T":"2024-11-25T00:07:57.983+0700","M":"http request middleware","url":"/api/register","duration":"68.2631ms"}
+{"L":"DEBUG","T":"2024-11-25T00:08:05.370+0700","M":"update \"User\" set \"token\" = $1 where (\"email\" ilike $2 or \"phone\" = $3) and \"password\" = $4 returning *"}
+{"L":"ERROR","T":"2024-11-25T00:08:05.371+0700","M":"sql: no rows in result set"}
+{"L":"INFO","T":"2024-11-25T00:08:05.371+0700","M":"http request middleware","url":"/api/login","duration":"1.5729ms"}
+{"L":"DEBUG","T":"2024-11-25T00:08:20.262+0700","M":"update \"User\" set \"token\" = $1 where (\"email\" ilike $2 or \"phone\" = $3) and \"password\" = $4 returning *"}
+{"L":"ERROR","T":"2024-11-25T00:08:20.263+0700","M":"sql: no rows in result set"}
+{"L":"INFO","T":"2024-11-25T00:08:20.263+0700","M":"http request middleware","url":"/api/login","duration":"1.2732ms"}
+{"L":"DEBUG","T":"2024-11-25T00:08:26.837+0700","M":"update \"User\" set \"token\" = $1 where (\"email\" ilike $2 or \"phone\" = $3) and \"password\" = $4 returning *"}
+{"L":"ERROR","T":"2024-11-25T00:08:26.838+0700","M":"sql: no rows in result set"}
+{"L":"INFO","T":"2024-11-25T00:08:26.838+0700","M":"http request middleware","url":"/api/login","duration":"1.0317ms"}
+{"L":"DEBUG","T":"2024-11-25T00:08:30.865+0700","M":"update \"User\" set \"token\" = $1 where (\"email\" ilike $2 or \"phone\" = $3) and \"password\" = $4 returning *"}
+{"L":"INFO","T":"2024-11-25T00:08:30.874+0700","M":"http request middleware","url":"/api/login","duration":"10.1685ms"}
+{"L":"DEBUG","T":"2024-11-25T00:09:56.905+0700","M":"with \"total_items\" as (select count(*) as \"total_items\" from \"Product\" p join \"Category\" c on p.category_id = c.id where 1=1), \"ProductGallery\" as (select p.id as product_id, array_agg(g.image_url) as image_urls from \"Product\" p join \"Gallery\" g on p.id = g.product_id group by p.id) select p.*, c.\"name\" , array_to_json(array_agg(pv.stock)) AS stock , array_to_json(array_agg(v.description)) AS variant, ti.\"total_items\", array_to_json(pg.image_urls) AS image_url, array_to_json(array_agg(pv.id)) AS \"product variant id\" from \"Product\" p join \"Category\" c on p.category_id = c.id join \"ProductVariant\" pv on pv.product_id = p.id   join \"Variant\" v on v.id = pv.variant_id join \"total_items\" ti on true join \"ProductGallery\" pg ON p.id = pg.product_id where 1=1 group by p.id , c.id, ti.total_items, pg.image_urls limit 6 offset 0;"}
+{"L":"INFO","T":"2024-11-25T00:09:56.912+0700","M":"http request middleware","url":"/api/product","duration":"6.5247ms"}
+{"L":"DEBUG","T":"2024-11-25T00:10:08.341+0700","M":"with \"ProductGallery\" as (select p.id as product_id, array_agg(g.image_url) as image_urls from \"Product\" p join \"Gallery\" g on p.id = g.product_id group by p.id) select p.*, c.\"name\" , array_to_json(array_agg(pv.stock)) AS stock , array_to_json(array_agg(v.description)) AS variant, array_to_json(pg.image_urls) AS image_url from \"Product\" p join \"Category\" c on p.category_id = c.id join \"ProductVariant\" pv on pv.product_id = p.id   join \"Variant\" v on v.id = pv.variant_id join \"ProductGallery\" pg ON p.id = pg.product_id where p.id=$1 group by p.id , c.id, pg.image_urls;"}
+{"L":"INFO","T":"2024-11-25T00:10:08.342+0700","M":"http request middleware","url":"/api/product/7","duration":"1.4566ms"}
+{"L":"DEBUG","T":"2024-11-25T00:10:49.380+0700","M":"insert into \"User\"(\"name\", \"email\", \"phone\", \"password\") values ($1, $2, $3, $4)"}
+{"L":"INFO","T":"2024-11-25T00:10:49.381+0700","M":"http request middleware","url":"/api/register","duration":"1.8699ms"}
+{"L":"DEBUG","T":"2024-11-25T00:11:06.155+0700","M":"update \"User\" set \"token\" = $1 where (\"email\" ilike $2 or \"phone\" = $3) and \"password\" = $4 returning *"}
+{"L":"INFO","T":"2024-11-25T00:11:06.165+0700","M":"http request middleware","url":"/api/login","duration":"9.4405ms"}
+{"L":"DEBUG","T":"2024-11-25T00:11:18.737+0700","M":"with \"total_items\" as (select count(*) as \"total_items\" from \"Product\" p join \"Category\" c on p.category_id = c.id where 1=1 and p.\"is_best_selling\" =  $1), \"ProductGallery\" as (select p.id as product_id, array_agg(g.image_url) as image_urls from \"Product\" p join \"Gallery\" g on p.id = g.product_id group by p.id) select p.*, c.\"name\" , array_to_json(array_agg(pv.stock)) AS stock , array_to_json(array_agg(v.description)) AS variant, ti.\"total_items\", array_to_json(pg.image_urls) AS image_url, array_to_json(array_agg(pv.id)) AS \"product variant id\" from \"Product\" p join \"Category\" c on p.category_id = c.id join \"ProductVariant\" pv on pv.product_id = p.id   join \"Variant\" v on v.id = pv.variant_id join \"total_items\" ti on true join \"ProductGallery\" pg ON p.id = pg.product_id where 1=1 and p.\"is_best_selling\" =  $1 group by p.id , c.id, ti.total_items, pg.image_urls limit 6 offset 0;"}
+{"L":"INFO","T":"2024-11-25T00:11:18.741+0700","M":"http request middleware","url":"/api/product?best_selling=true","duration":"3.2222ms"}
+{"L":"DEBUG","T":"2024-11-25T00:11:31.451+0700","M":"select 1 from \"User\" where \"id\"=$1 and \"token\"=$2"}
+{"L":"DEBUG","T":"2024-11-25T00:11:31.452+0700","M":"select c.id, p.\"name\" , v.description , p.price_after_discount , c.qty from \"Cart\" c join \"ProductVariant\" pv on pv.id = c.product_variant_id join \"Product\" p on p.id = pv.product_id join \"Variant\" v on v.id = pv.variant_id where c.user_id = $1;"}
+{"L":"INFO","T":"2024-11-25T00:11:31.454+0700","M":"http request middleware","url":"/api/cart","duration":"2.8309ms"}
+{"L":"DEBUG","T":"2024-11-25T00:11:34.752+0700","M":"select 1 from \"User\" where \"id\"=$1 and \"token\"=$2"}
+{"L":"DEBUG","T":"2024-11-25T00:11:34.753+0700","M":"select sum(qty) from \"Cart\" c where c.user_id = $1;"}
+{"L":"ERROR","T":"2024-11-25T00:11:34.753+0700","M":"sql: Scan error on column index 0, name \"sum\": converting NULL to int is unsupported"}
+{"L":"INFO","T":"2024-11-25T00:11:34.754+0700","M":"http request middleware","url":"/api/cart/total","duration":"1.5079ms"}
